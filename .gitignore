@@ -1,0 +1,30 @@
+# Ignore compiled classes and build artifacts
+/build/
+/target/
+/out/
+/bin/
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# Maven-specific
+.mvn/
+!**/src/main/**/mvn-wrapper.jar
+mvnw
+mvnw.cmd
+
+# Tomcat deployment files
+*.log
+*.war
+
+# Local config and sensitive data
+*.iml
+application.properties
+db.properties
+.env
+
+# OS-specific
+.DS_Store
+Thumbs.db

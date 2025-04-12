@@ -1,16 +1,17 @@
-package com.kade.dbmanager;
+package com.kade.jspportfolio.dbmanager;
 
 import java.sql.*;
 import java.util.Properties;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class DBManager {
 	
-	// シングルトン
+	// Singleton
 	private static DBManager instance = new DBManager();
 	public static DBManager getInstance() { return instance; }
 	
-	// 読み込む文字列
+	// Strings to read
 	private static String
 		url, 
 		user, 
@@ -19,16 +20,15 @@ public class DBManager {
 	
 	private DBManager() {
 		try {
-			// WEB-INF/db.propertiesから読み込む
+			// Read properties from db.properties
 			Properties props = new Properties();
-			InputStream input = getClass().getClassLoader().getResourceAsStream("/WEB-INF/db.properties");
+			// Parsing database secrets from external file, to be changed in production to envs
+			String path = System.getProperty("catalina.home") + "/conf/db.properties";
 			
-			if (input == null) {
-				throw new RuntimeException("WEB-INFからdb.propertiesを探せませんでした");
+			try (FileInputStream fis = new FileInputStream(path)){
+				props.load(fis);
 			}
-			
-			props.load(input);
-			
+						
 			url = props.getProperty("db.url");
 			user = props.getProperty("db.user");
 			password = props.getProperty("db.password");
@@ -48,6 +48,8 @@ public class DBManager {
 			return null;
 		}
 	}
+	
+	// maybe... useless?
 	
 	public void close(Connection conn, PreparedStatement pstmt) {
 		try {

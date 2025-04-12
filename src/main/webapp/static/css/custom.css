@@ -1,0 +1,11 @@
+@charset "UTF-8";
+table td, table th {
+	white-space: nowrap;
+}
+.shrink-col {
+	width: 1%;
+	white-space: nowrap;
+}
+.stretch-col {
+	width: auto;
+}

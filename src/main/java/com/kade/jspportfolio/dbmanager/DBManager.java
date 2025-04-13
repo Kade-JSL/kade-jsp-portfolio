@@ -20,19 +20,25 @@ public class DBManager {
 	
 	private DBManager() {
 		try {
-			// Read properties from db.properties
-			Properties props = new Properties();
-			// Parsing database secrets from external file, to be changed in production to envs
-			String path = System.getProperty("catalina.home") + "/conf/db.properties";
+			// for local test environment
+//			// Read properties from db.properties
+//			Properties props = new Properties();
+//			// Parsing database secrets from external file, to be changed in production to envs
+//			String path = System.getProperty("catalina.home") + "/conf/db.properties";
+//			
+//			try (FileInputStream fis = new FileInputStream(path)){
+//				props.load(fis);
+//			}
+//						
+//			url = props.getProperty("db.url");
+//			user = props.getProperty("db.user");
+//			password = props.getProperty("db.password");
+//			driver = props.getProperty("db.driver", "org.postgresql.Driver");
 			
-			try (FileInputStream fis = new FileInputStream(path)){
-				props.load(fis);
-			}
-						
-			url = props.getProperty("db.url");
-			user = props.getProperty("db.user");
-			password = props.getProperty("db.password");
-			driver = props.getProperty("db.driver", "org.postgresql.Driver");
+			url = System.getenv("JSP_DB_URL");
+			user = System.getenv("JSP_DB_USER");
+			password = System.getenv("JSP_DB_PW");
+			driver = System.getenv("JSP_DB_DRIVER");
 			
 			Class.forName(driver);
 		} catch (Exception e) {

@@ -1,4 +1,4 @@
-# JSP Comment Board Portfolio([日本語は下にあります](#JSP-ポートフォリオ-コメントボード))
+# JSP Comment Board Portfolio([日本語は下にあります](#jsp-ポートフォリオコメントボード))
 
 A minimalist Java web app build with JSP/Servlet, and PostgreSQL to demonstrate basic full stack CRUD operations with simple session based access control.
 

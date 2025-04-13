@@ -1,6 +1,6 @@
 # JSP Comment Board Portfolio([日本語は下にあります](#jsp-ポートフォリオコメントボード))
 
-A minimalist Java web app build with JSP/Servlet, and PostgreSQL to demonstrate basic full stack CRUD operations with simple session based access control.
+A minimalist Java web app build with JSP/Servlet, and PostgreSQL to demonstrate basic full stack CRUD operations with simple session based access control. The demo is proudly hosted on https://portfolio-jsp.kade.jp/main , self-hosted in my Raspberry Pi server.
 
 ## 🔎 Project Overview
 
@@ -14,8 +14,10 @@ This repo is a portfolio project that implements:
 - Forms and layout enhanced by Bootstrap
 - `.properties` config loading via `Properties` and `InputStream`
 - JSTL for conditional rendering
+- **Deployed to real server**(NEW!)
+- **Forwarded via [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)**(NEW!)
 
-This is a local test app. So it *Works on My Machine™*.
+This was a local test app, though. So it only *Works on My Machine™*.
 
 ---
 
@@ -23,10 +25,12 @@ This is a local test app. So it *Works on My Machine™*.
 
 - Java (JSP/Servlet)
 - PostgreSQL
-- Tomcat (tested inside Eclipse IDE)
+- Tomcat
 - JSTL
 - Bootstrap(v5)
 - Java EE Jakarta dependencies
+- Linux (Raspberry Pi OS / Debian Bookworm)
+- Cloudflare
 
 ---
 
@@ -39,24 +43,29 @@ This is a local test app. So it *Works on My Machine™*.
 | Edit/Delete comment(`U`/`D`) | ✅ Done |
 | Simple login feature via env | ✅ Done |
 | Servlet session control | ✅ Done |
-| `.properties` file loading | 💫 Local workaround |
-| Deployment-ready | 🔜 Soon™ |
+| Deployment-ready | 🔜 Almost done! |
 
 ---
 
 ## 🛑 Credentials & Authentication
 
-Login credentials are currently loaded via **OS environment variables**, and DB ones are loaded from a `db.properties` file placed in the `$CATALINA_HOME/conf/` directory. I plan to make the code fully env dependent because it's easy and hassle-free, but not yet.
+At first, you have to make a env file before deployment:
 
-```properties
-# db.properties
-db.url=jdbc:postgresql://localhost:5432/your_db
-db.user=your_user
-db.password=your_password
-db.driver=org.postgresql.Driver
+```bash
+# /etc/default/tomcat-env (or other place you prefer)
+JSP_ADMIN_ID=**yourid**
+JSP_ADMIN_PW=**yourpw**
+JSP_DB_URL=jdbc:postgresql://localhost:5432/**yourdatabase**
+JSP_DB_USER=**yourdbname**
+JSP_DB_PW=**yourdbpw**
+JSP_DB_DRIVER=org.postgresql.Driver
+# optional: specify JAVA_HOME
+# JAVA_HOME=/usr/lib/jvm/java-17-openjdk-*
 ```
 
-To authenticate: POST to `/login`, via form fields `id`, and `pw`.
+And make sure proper Java and `postgres` is installed. Set up the DB manually (sorry, no JPA) in `psql`, search for tutorials.
+
+When the webpage loads properly, try to log in with the `id` and `pw` you configured in env file. If this is successful, you're good to go.
 
 ---
 
@@ -83,8 +92,7 @@ src/
 
 ## 🐛 Known Issues
 
-- Failed numerous times to load `.properties` properly.
-- Load envs via Run Configuration when running it in Eclipse, because Tomcat runs utterly separately from system.
+- Too many configs needed: I made the webapp initially to deploy to my server only, but I'm planning to take more automated approach.
 - No encryption or CSRF thing: this is an intentionally insecure demo.
 
 ---
@@ -95,6 +103,7 @@ src/
 - [ ] Refactor codebase for better MVC separation
 - [ ] Dockerize the setup
 - [ ] Add unit testing (optional)
+- [ ] Deployment automation
 
 ---
 
@@ -106,7 +115,7 @@ That's me, [Kade](https://github.com/Kade-JSL). And this repo is an almost perfe
 
 # JSP ポートフォリオ・コメントボード
 
-JSP/ServletとPostgreSQLを用いて構築した、ミニマルなJava Webアプリです。基本的なフルスタックのCRUD操作の実演に加え、簡易的なセッションベースのアクセス制限も実装したものです。
+JSP/ServletとPostgreSQLを用いて構築した、ミニマルなJava Webアプリです。基本的なフルスタックのCRUD操作の実演に加え、簡易的なセッションベースのアクセス制限も実装したものです。現在 https://portfolio-jsp.kade.jp/main にて、自家製Raspberry Piサーバーを通じてセルフホストされております。
 
 ---
 
@@ -122,8 +131,10 @@ JSP/ServletとPostgreSQLを用いて構築した、ミニマルなJava Webアプ
 - フォームとレイアウトはBootstrap基盤
 - `Properties`と`InputStream`オブジェクトを活用した `.properties` 設定ファイル読み込み
 - JSTLを活用そた条件付き描画
+- **実際のサーバーにデプロイ**(NEW!)
+- **[Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)でフォワーディング**
 
-ローカルでテストする用途のアプリです。いわゆる「俺の環境では動くが？」状態でございます。
+ローカルでテストする用途のアプリでしたので、いわゆる「俺の環境では動くが？」状態でございます。
 
 ---
 
@@ -135,6 +146,8 @@ JSP/ServletとPostgreSQLを用いて構築した、ミニマルなJava Webアプ
 - JSTL
 - Bootstrap (v5)
 - Java EE Jakarta 依存性
+- Linux (Raspberry Pi OS / Debian Bookworm)
+- Cloudflare
 
 ---
 
@@ -147,26 +160,29 @@ JSP/ServletとPostgreSQLを用いて構築した、ミニマルなJava Webアプ
 | コメント編集・削除 (`U`/`D`) | ✅ 完了 |
 | 環境変数を利用した簡単ログイン | ✅ 完了 |
 | Servletセッション制御 | ✅ 完了 |
-| `.properties`ファイル読み込み | 💫 ローカルでは別の方法 |
-| サーバーへのデプロイ対応 | 🔜 近日中公開！ |
+| サーバーへのデプロイ対応 | 🔜 だいたい終わり！ |
 
 ---
 
 ## 🛑 DB連携・ログイン認証
 
-ただ今のコードでは`$CATALINA_HOME/conf/db.properties`にてDBのログイン情報を、Eclipseの`Run Configuration`にてウェブサイトのログイン情報を格納しています。最終的にサーバーに導入する際には全部環境変数から読み込むようにする予定です。
+デプロイする前に、環境変数ファイルを作成します：
 
-```properties
-# db.properties
-db.url=jdbc:postgresql://localhost:5432/your_db
-db.user=your_user
-db.password=your_password
-db.driver=org.postgresql.Driver
-```
 ```bash
-# 認証方法
-# idとpwフィールドをフォームに入れて/loginにPOSTリクエストを送るとログインセッション取得
+# /etc/default/tomcat-env (or other place you prefer)
+JSP_ADMIN_ID=**yourid**
+JSP_ADMIN_PW=**yourpw**
+JSP_DB_URL=jdbc:postgresql://localhost:5432/**yourdatabase**
+JSP_DB_USER=**yourdbname**
+JSP_DB_PW=**yourdbpw**
+JSP_DB_DRIVER=org.postgresql.Driver
+# optional: specify JAVA_HOME
+# JAVA_HOME=/usr/lib/jvm/java-17-openjdk-*
 ```
+
+適切なJavaと`postgres`がインストールされているのかも確認。DBは`psql`で設定をお願いします(JPAじゃなくてごめん)。ネットで調べれば出るから。
+
+ログインは環境変数ファイルで設定した`id`と`pw`を入力すればできます。これができると環境変数はちゃんとロードされったってことです。
 
 ---
 
@@ -193,8 +209,7 @@ src/
 
 ## 🐛 既知の問題
 
-- Tomcatの具合が悪いのか、結局`.properties`ファイルは思い通りには読み込めませんでした(本来なら`src/main/resources`フォルダなどに入れるべき)。
-- Eclipseにて環境変数を読み込む時には必ず`Run Configuration`をご確認ください。Eclipseで稼働するTomcatはシステムとは別の環境です。
+- デプロイ作業がちょっと多い
 - デモプロジェクトであるため、暗号化やCSRF対策などは意図的に見逃しました。
 
 ---
@@ -205,6 +220,7 @@ src/
 - [ ] MVCパターンをもっと明確に分離するためのリファクタリング
 - [ ] Docker対応
 - [ ] (あわよくば)ユニットテスト対応
+- [ ] デプロイ自動化
 
 ---
 

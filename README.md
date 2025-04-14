@@ -1,6 +1,6 @@
 # JSP Comment Board Portfolio([日本語は下にあります](#jsp-ポートフォリオコメントボード))
 
-A minimalist Java web app build with JSP/Servlet, and PostgreSQL to demonstrate basic full stack CRUD operations with simple session based access control. The demo is proudly hosted on https://portfolio-jsp.kade.jp/main , self-hosted in my Raspberry Pi server.
+A minimalist Java web app build with JSP/Servlet, and PostgreSQL to demonstrate basic full stack CRUD operations with simple session based access control. The demo is on https://portfolio-jsp.kade.jp/ , and proudly self-hosted on my Raspberry Pi server.
 
 ## 🔎 Project Overview
 
@@ -8,7 +8,7 @@ This repo is a portfolio project that implements:
 
 - A basic **CRUD comment board** (Create, Read, Update, Delete)
 - User-facing **read-only** view
-- A protected **admin view** for authenticated users (you, and me)
+- A protected **admin view** for authenticated users
 - PostgreSQL as backend DB
 - Servlet based request routing and session control
 - Forms and layout enhanced by Bootstrap
@@ -115,7 +115,7 @@ That's me, [Kade](https://github.com/Kade-JSL). And this repo is an almost perfe
 
 # JSP ポートフォリオ・コメントボード
 
-JSP/ServletとPostgreSQLを用いて構築した、ミニマルなJava Webアプリです。基本的なフルスタックのCRUD操作の実演に加え、簡易的なセッションベースのアクセス制限も実装したものです。現在 https://portfolio-jsp.kade.jp/main にて、自家製Raspberry Piサーバーを通じてセルフホストされております。
+JSP/ServletとPostgreSQLを用いて構築した、ミニマルなJava Webアプリです。基本的なフルスタックのCRUD操作の実演に加え、簡易的なセッションベースのアクセス制限も実装したものです。現在 https://portfolio-jsp.kade.jp/ にて、自家製Raspberry Piサーバーを通じてセルフホストされております。
 
 ---
 
@@ -125,14 +125,14 @@ JSP/ServletとPostgreSQLを用いて構築した、ミニマルなJava Webアプ
 
 - 基本的なCRUDができるコメントボード(作成(Create)・閲覧(Read)・編集(Update)・削除(Delete))
 - 非認証ユーザー向けの閲覧専用ビュー
-- 認証済みユーザー(即ち、あなた)向けの管理ビュー
+- 認証済みユーザー向けの管理ビュー
 - PostgreSQLをバックエンドDBとして採用
 - Servletを活用したリクエストルーティング、セッション制御
 - フォームとレイアウトはBootstrap基盤
 - `Properties`と`InputStream`オブジェクトを活用した `.properties` 設定ファイル読み込み
 - JSTLを活用そた条件付き描画
 - **実際のサーバーにデプロイ**(NEW!)
-- **[Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)でフォワーディング**
+- **[Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)でフォワーディング**(NEW!)
 
 ローカルでテストする用途のアプリでしたので、いわゆる「俺の環境では動くが？」状態でございます。
 

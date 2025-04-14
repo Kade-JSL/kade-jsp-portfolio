@@ -12,9 +12,9 @@
 <head>
 <meta charset="UTF-8">
 
-<link href="static/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="static/css/custom.css" rel="stylesheet"/>
-<script src="static/js/bootstrap.min.js"></script>
+<link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="/static/css/custom.css" rel="stylesheet"/>
+<script src="/static/js/bootstrap.min.js"></script>
 
 <title>Portfolio-JSP</title>
 </head>

@@ -35,10 +35,19 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String adminId = System.getenv("JSP_ADMIN_ID");
 		String adminPw = System.getenv("JSP_ADMIN_PW");
+		
+		// for recruiters during job application
+		String demoId = System.getenv("JSP_DEMO_ID");
+		String demoPw = System.getenv("JSP_DEMO_PW");
+		boolean demoMode = Boolean.parseBoolean(System.getenv("JSP_DEMO_MODE"));
+		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
-		if(adminId.equals(id) && adminPw.equals(pw)) {
+		boolean isAdmin = adminId.equals(id) && adminPw.equals(pw);
+		boolean isDemo = demoMode && demoId.equals(id) && demoPw.equals(pw);
+		
+		if(isAdmin || isDemo) {
 			request.getSession().setAttribute("auth", "admin");
 			response.sendRedirect("main");			
 		} else {
